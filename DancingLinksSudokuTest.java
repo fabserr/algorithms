@@ -187,7 +187,7 @@ public class DancingLinksSudokuTest {
 
 	@Test
 	public void testInitColumn() {
-		DancingLinksSudoku dancingLinks = DancingLinksSudoku.getInstance();
+		DancingLinksSudoku dancingLinks = new DancingLinksSudoku();
 		assertNotNull(dancingLinks.getColumns());
 
 		dancingLinks.initColumns();
@@ -201,7 +201,7 @@ public class DancingLinksSudokuTest {
 
 	@Test
 	public void testInsertOneNode() {
-		DancingLinksSudoku dancingLinks = DancingLinksSudoku.getInstance();
+		DancingLinksSudoku dancingLinks = new DancingLinksSudoku();
 
 		dancingLinks.initColumns();
 
@@ -223,7 +223,7 @@ public class DancingLinksSudokuTest {
 
 	@Test
 	public void testInsertTwoNodesSameSet() {
-		DancingLinksSudoku dancingLinks = DancingLinksSudoku.getInstance();
+		DancingLinksSudoku dancingLinks = new DancingLinksSudoku();
 
 		dancingLinks.initColumns();
 		XNode left = dancingLinks.insertNode(0, 0);
@@ -247,7 +247,7 @@ public class DancingLinksSudokuTest {
 
 	@Test
 	public void testInsertTwoNodesSameColumn() {
-		DancingLinksSudoku dancingLinks = DancingLinksSudoku.getInstance();
+		DancingLinksSudoku dancingLinks = new DancingLinksSudoku();
 
 		dancingLinks.initColumns();
 		XNode first = dancingLinks.insertNode(0, 0);
@@ -271,7 +271,7 @@ public class DancingLinksSudokuTest {
 
 	@Test
 	public void testInit() {
-		DancingLinksSudoku dancingLinks = DancingLinksSudoku.getInstance();
+		DancingLinksSudoku dancingLinks = new DancingLinksSudoku();
 
 		dancingLinks.init();
 
@@ -286,7 +286,7 @@ public class DancingLinksSudokuTest {
 
 	@Test
 	public void testRemoveR1C1n1() {
-		DancingLinksSudoku dancingLinks = DancingLinksSudoku.getInstance();
+		DancingLinksSudoku dancingLinks = new DancingLinksSudoku();
 
 		dancingLinks.init();
 
@@ -319,7 +319,7 @@ public class DancingLinksSudokuTest {
 
 	@Test
 	public void testRemoveR1C1n2() {
-		DancingLinksSudoku dancingLinks = DancingLinksSudoku.getInstance();
+		DancingLinksSudoku dancingLinks = new DancingLinksSudoku();
 
 		dancingLinks.init();
 
@@ -352,7 +352,7 @@ public class DancingLinksSudokuTest {
 
 	@Test
 	public void testRemoveR9C9n9() {
-		DancingLinksSudoku dancingLinks = DancingLinksSudoku.getInstance();
+		DancingLinksSudoku dancingLinks = new DancingLinksSudoku();
 
 		dancingLinks.init();
 
@@ -385,14 +385,15 @@ public class DancingLinksSudokuTest {
 
 	@Test
 	public void testRun1() {
-		DancingLinksSudoku sudoku = DancingLinksSudoku.getInstance();
+		System.out.println("test1");
+		DancingLinksSudoku sudoku = new DancingLinksSudoku();
 		sudoku.init(s1);
 		assertTrue(sudoku.run(null));
 	}
 
 	@Test
 	public void testRun2() {
-		DancingLinksSudoku sudoku = DancingLinksSudoku.getInstance();
+		DancingLinksSudoku sudoku = new DancingLinksSudoku();
 		sudoku.init(s2);
 		assertFalse(sudoku.run(null));
 	}
@@ -400,63 +401,70 @@ public class DancingLinksSudokuTest {
 	// grille invalide : TODO
 	// @Test
 	// public void testRun3() {
-	// DancingLinksSudoku sudoku = DancingLinksSudoku.getInstance();
+	// DancingLinksSudoku sudoku = new DancingLinksSudoku();
 	// sudoku.init(s3);
 	// assertFalse(sudoku.run());
 	// }
 
 	@Test
 	public void testRun4() {
-		DancingLinksSudoku sudoku = DancingLinksSudoku.getInstance();
+		System.out.println("test4");
+		DancingLinksSudoku sudoku = new DancingLinksSudoku();
 		sudoku.init(s4);
 		assertTrue(sudoku.run(null));
 	}
 
 	@Test
 	public void testRun5() {
-		DancingLinksSudoku sudoku = DancingLinksSudoku.getInstance();
+		System.out.println("test5");
+		DancingLinksSudoku sudoku = new DancingLinksSudoku();
 		sudoku.init(s5);
 		assertTrue(sudoku.run(null));
 	}
 
 	@Test
 	public void testRun10() {
-		DancingLinksSudoku sudoku = DancingLinksSudoku.getInstance();
+		System.out.println("test10");
+		DancingLinksSudoku sudoku = new DancingLinksSudoku();
 		sudoku.init(s10);
 		assertTrue(sudoku.run(null));
 	}
 
 	@Test
 	public void testRun11() {
-		DancingLinksSudoku sudoku = DancingLinksSudoku.getInstance();
+		System.out.println("test11");
+		DancingLinksSudoku sudoku = new DancingLinksSudoku();
 		sudoku.init(s11);
 		assertTrue(sudoku.run(null));
 	}
 
 	@Test
 	public void testRun13() {
-		DancingLinksSudoku sudoku = DancingLinksSudoku.getInstance();
+		System.out.println("test13");
+		DancingLinksSudoku sudoku = new DancingLinksSudoku();
 		sudoku.init(s13);
 		assertTrue(sudoku.run(null));
 	}
 
 	@Test
 	public void testRun14() {
-		DancingLinksSudoku sudoku = DancingLinksSudoku.getInstance();
+		DancingLinksSudoku sudoku = new DancingLinksSudoku();
 		sudoku.init(s14);
 		assertFalse(sudoku.run(null));
 	}
 
 	@Test
 	public void testRun15() {
-		DancingLinksSudoku sudoku = DancingLinksSudoku.getInstance();
+		System.out.println("test15");
+		DancingLinksSudoku sudoku = new DancingLinksSudoku();
 		sudoku.init(s15);
 		assertTrue(sudoku.run(null));
 	}
 
 	@Test
 	public void testRun18() {
-		DancingLinksSudoku sudoku = DancingLinksSudoku.getInstance();
+		System.out.println("test18");
+		DancingLinksSudoku sudoku = new DancingLinksSudoku();
 		sudoku.init(s18);
 		assertTrue(sudoku.run(null));
 	}

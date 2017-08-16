@@ -26,26 +26,25 @@ import java.util.Map;
 public class DancingLinksSudoku {
 
 
-	/** Instance unique pré-initialisée */
-	private static DancingLinksSudoku INSTANCE = new DancingLinksSudoku();
-
-	Map<Integer, Map<ColumnNode, Boolean>> nextColumns = new HashMap<Integer, Map<ColumnNode, Boolean>>();
-
-	/** Point d'accès pour l'instance unique du singleton */
-	public static DancingLinksSudoku getInstance() {
-		return INSTANCE;
-	}
-
-	private Map<Integer, ColumnNode> columns = new HashMap<Integer, ColumnNode>();
+	private Sudoku solution ;
+	private Map<Integer, ColumnNode> columns ;
+	Map<Integer, Map<ColumnNode, Boolean>> nextColumns ;
 	public ColumnNode h;
 
+	public DancingLinksSudoku() {
+		solution = new Sudoku();
+		columns = new HashMap<Integer, ColumnNode>();
+		nextColumns = new HashMap<Integer, Map<ColumnNode, Boolean>>();
+		h = null;
+		init();
+	}
+	
 	public Map<Integer, ColumnNode> getColumns() {
 		return columns;
 	}
 
 
 	public void init(char[][] c) {
-		init();
 		remove(c);
 	}
 
@@ -143,8 +142,10 @@ public class DancingLinksSudoku {
 	private void remove(char[][] c) {
 		for (int i = 0; i < Constants.n_2; i++)
 			for (int j = 0; j < Constants.n_2; j++)
-				if ('.' != c[i][j])
+				if ('.' != c[i][j]) {
 					removeKnownSquare(i, j, c[i][j]);
+					solution.setSquare(i,j,c[i][j]);
+				}
 	}
 
 	public void removeKnownSquare(int i, int j, char c) {
@@ -164,12 +165,15 @@ public class DancingLinksSudoku {
 
 	boolean run(int k, ColumnNode column) {
 		if (h.right == h) {
+			solution.display();
+			System.out.println();
 			return true;
 		}
 		if (column == null)
 			return false;
 		List<Node> sets = cover(column);
 		for (Node set : sets) {
+			solution.set((XNode) set);
 			List<List<Node>> setOfSubsets = new LinkedList<List<Node>>();
 			for (XNode right = (XNode) set.right; right != set; right = (XNode) right.right) {
 				ColumnNode c_j = right.columnNode;
@@ -188,6 +192,7 @@ public class DancingLinksSudoku {
 					uncover(((XNode) subsets.get(0)).columnNode);
 				}
 			}
+			solution.reset((XNode) set);
 		}
 
 		for (Node set : sets)
@@ -269,27 +274,17 @@ public class DancingLinksSudoku {
 		if (selected == null)
 			return null;
 
-		int count = 0;
 		for (ColumnNode current = h.right; current != h; current = current.right) {
 			if (selected.size == 1 && selectedColumns.get(selected) == null) {
 				selectedColumns.put(selected, true);
-				System.out.println("k: " + k);
-				System.out.println("total: " + count);
-				System.out.println("selected: " + selected.getName()
-						+ " size: " + selected.size);
 				return selected;
 			} else if (current.size > 0 && current.size < selected.size
 					&& selectedColumns.get(current) == null) {
 				selected = current;
 			}
-			count += current.size;
 		}
 		
 		if (selected.size > 0) {
-			System.out.println("k: " + k);
-			System.out.println("total: " + count);
-			System.out.println("selected: " + selected.getName() + " size: "
-					+ selected.size);
 			selectedColumns.put(selected, true);
 			return selected;
 		}
